@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>موقعي الإسلامي - المحسّن</title>
+  <title>موقعي الإسلامي</title>
   <style>
     body {
       font-family: 'Tahoma', sans-serif;
@@ -206,8 +206,8 @@
 <body>
   <div class="container">
     <header>
-      <h1>🌙 موقعي الإسلامي المحسّن</h1>
-      <div class="location">الرياض، المملكة العربية السعودية</div>
+      <h1>🌙 موقعي الإسلامي </h1>
+      <div class="location">الخبر، المملكة العربية السعودية</div>
     </header>
     
     <div class="card">
@@ -239,7 +239,7 @@
     </div>
     
     <footer>
-      <p>جميع الحقوق محفوظة © 2023 موقعي الإسلامي</p>
+      <p>Hz Bahkali 2025 جميع الحقوق محفوظة</p>
       <p class="small">تم التحديث: <span id="current-date"></span></p>
     </footer>
   </div>
@@ -268,7 +268,7 @@
     document.getElementById('current-date').textContent = now.toLocaleDateString('ar-SA', options);
     
     // استخدام Aladhan API المجاني لأوقات الصلاة في الرياض
-    fetch('https://api.aladhan.com/v1/timingsByCity?city=Riyadh&country=Saudi%20Arabia&method=4')
+    fetch('https://api.aladhan.com/v1/timingsByCity?city=Dammam&country=Saudi%20Arabia&method=4')
       .then(response => response.json())
       .then(data => {
         const t = data.data.timings;
