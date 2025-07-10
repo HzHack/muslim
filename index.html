@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>موقعي الإسلامي</title>
+  <style>
+    body {
+      font-family: 'Tahoma', sans-serif;
+      background: #f7f7f7;
+      color: #333;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .small {
+      color: #777;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌙 موقعي الإسلامي</h1>
+
+  <div class="card">
+    <h2>🕋 أوقات الصلاة</h2>
+    <div id="prayer-times">جارٍ التحميل...</div>
+  </div>
+
+  <div class="card">
+    <h2>📖 آية اليوم</h2>
+    <div id="verse">"وَقُل رَّبِّ زِدْنِي عِلْمًا – [طه:114]"</div>
+  </div>
+
+  <div class="card">
+    <h2>💬 ذكر اليوم</h2>
+    <div id="zikr">سبحان الله وبحمده، سبحان الله العظيم</div>
+  </div>
+
+  <script>
+    // استخدام Aladhan API المجاني لأوقات الصلاة في الرياض
+    fetch('https://api.aladhan.com/v1/timingsByCity?city=Riyadh&country=Saudi%20Arabia&method=4')
+      .then(response => response.json())
+      .then(data => {
+        const t = data.data.timings;
+        
+        function convertTo12Hour(time24) {
+            const [hour, minute] = time24.split(':').map(Number);
+            const period = hour >= 12 ? 'م' : 'ص';
+            const hour12 = hour % 12 || 12;
+            return `${hour12}:${minute.toString().padStart(2, '0')} ${period}`;
+        }
+
+        document.getElementById("prayer-times").innerHTML = `
+    
+          <p>الفجر: ${convertTo12Hour(t.Fajr)}</p>
+          <p>الظهر: ${convertTo12Hour(t.Dhuhr)}</p>
+          <p>العصر: ${convertTo12Hour(t.Asr)}</p>
+          <p>المغرب: ${convertTo12Hour(t.Maghrib)}</p>
+          <p>العشاء: ${convertTo12Hour(t.Isha)}</p>
+        `;
+      })
+      .catch(error => {
+        document.getElementById("prayer-times").innerText = "فشل في تحميل أوقات الصلاة.";
+        console.error("Prayer times fetch error:", error);
+      });
+  </script>
+
+</body>
+</html>
